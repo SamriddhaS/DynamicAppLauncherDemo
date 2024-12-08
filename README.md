@@ -18,7 +18,7 @@ This project demonstrates how to implement dynamic app launcher icons in Android
 
 <h2>🎥 Preview</h2>
 <p align="center">
-  <img src="/screenshots/demo.gif" align="center" width="100%"/>
+  <img src="/screenshots/demo.gif" align="center" />
 </p>
 
 ---
