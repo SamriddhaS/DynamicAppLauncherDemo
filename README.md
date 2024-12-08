@@ -18,7 +18,7 @@ This project demonstrates how to implement dynamic app launcher icons in Android
 
 <h2>🎥 Preview</h2>
 <p align="center">
-  <em>Attach a GIF showcasing the demo here.</em>
+  <img src="/screenshots/demo.gif" align="center" width="100%"/>
 </p>
 
 ---
@@ -31,7 +31,6 @@ This project demonstrates how to implement dynamic app launcher icons in Android
   <li><a href="#code-snippets">Code Snippets</a></li>
   <li><a href="#usage">Usage</a></li>
   <li><a href="#contributing">Contributing</a></li>
-  <li><a href="#license">License</a></li>
 </ol>
 
 ---
@@ -59,13 +58,40 @@ This project demonstrates how to implement dynamic app launcher icons in Android
 <h2 id="implementation-highlights">✨ Implementation Highlights</h2>
 
 <h3>1. Manifest Configuration</h3>
-<p>We define <code>ActivityAlias</code> entries in the <code>AndroidManifest.xml</code> to manage multiple app icons. Each alias is mapped to the main activity but uses a different icon.</p>
+<p>We define <code>ActivityAlias</code> entries in the <code>AndroidManifest.xml</code> to manage multiple app icons. Each alias is mapped to the main activity but uses a different icon. We can add activity alias for each of the launcher icon that we want to configure.</p>
 
 <pre>
-<code>&lt;activity-alias
+<code>&lt;!-- This is enabled by default --&gt;
+&lt;activity-alias
+    android:name=".DefaultTheme"
+    android:enabled="true"
+    android:icon="@mipmap/ic_launcher"
+    android:targetActivity=".MainActivity"
+    android:exported="true"&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name="android.intent.action.MAIN" /&gt;
+        &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
+    &lt;/intent-filter&gt;
+&lt;/activity-alias&gt;
+
+&lt;!-- Icon one: disabled by default --&gt;
+&lt;activity-alias
     android:name=".MyIconOne"
     android:enabled="false"
     android:icon="@mipmap/my_launch_icon_one"
+    android:targetActivity=".MainActivity"
+    android:exported="true"&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name="android.intent.action.MAIN" /&gt;
+        &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
+    &lt;/intent-filter&gt;
+&lt;/activity-alias&gt;
+
+&lt;!-- Icon two: disabled by default --&gt;
+&lt;activity-alias
+    android:name=".MyIconTwo"
+    android:enabled="false"
+    android:icon="@mipmap/my_launch_icon_two"
     android:targetActivity=".MainActivity"
     android:exported="true"&gt;
     &lt;intent-filter&gt;
