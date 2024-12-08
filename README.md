@@ -48,7 +48,7 @@ This project demonstrates how to implement dynamic app launcher icons in Android
 <h3>Setup</h3>
 <ol>
   <li>Clone the repository:
-    <pre><code>git clone https://github.com/yourusername/dynamic-app-icon-demo.git</code></pre>
+    <pre><code>git clone https://github.com/SamriddhaS/DynamicAppLauncherDemo.git</code></pre>
   </li>
   <li>Open the project in Android Studio.</li>
   <li>Build and run the project on a physical device or emulator.</li>
