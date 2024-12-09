@@ -28,8 +28,8 @@ This project demonstrates how to implement dynamic app launcher icons in Android
 <ol>
   <li><a href="#setup-and-requirements">Setup and Requirements</a></li>
   <li><a href="#implementation-highlights">Implementation Highlights</a></li>
-  <li><a href="#code-snippets">Code Snippets</a></li>
   <li><a href="#usage">Usage</a></li>
+  <li><a href="#blog-links">Blog Links Reated to this topic</a></li>
   <li><a href="#contributing">Contributing</a></li>
 </ol>
 
@@ -187,6 +187,18 @@ fun ImageSelector(
 </ol>
 
 ---
+
+<h2 id="blog-links">📝 Blog Links</h2>
+
+<p>Here are some helpful blogs that inspired and guided the implementation of this feature:</p>
+
+<ul>
+  <li><a href="https://oguzhanaslann.medium.com/dynamic-app-icon-in-android-a61f8570ab9f" target="_blank">Dynamic App Icon in Android by Oğuzhan Aslan</a></li>
+  <li><a href="https://blog.famapp.in/blog/change-app-icon-dynamically-in-android/" target="_blank">Change App Icon Dynamically in Android by FamApp Blog</a></li>
+</ul>
+
+---
+
 
 <h2 id="contributing">🤝 Contributing</h2>
 
