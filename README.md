@@ -10,7 +10,7 @@ This project demonstrates how to implement dynamic app launcher icons in Android
 
 <p align="center">
   Changed the implementation a little to make sure not to kill the app with every icon change. The app will still get killed once when changing 
-  from the default one. Thank you <a href="linkedin.com/in/avinav-srivastava-878635a0" target="_blank">Avinav Srivastava</a> for suggesting me this change.
+  from the default icon Thank you <a href="linkedin.com/in/avinav-srivastava-878635a0" target="_blank">Avinav Srivastava</a> for suggesting me this change.
 </p>
 
 ---
