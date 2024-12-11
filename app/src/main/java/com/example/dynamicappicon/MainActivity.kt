@@ -71,7 +71,10 @@ class MainActivity : ComponentActivity() {
             DynamicAppIconTheme {
                 MyApp(
                     onChangeAppIcon = { icon ->
-                        changeIcon(icon)
+                        val currentIcon = sharedPref.getString(CURRENT_ICON_KEY,AppLauncherIcons.Default_Theme.themeName)
+                        // If the selected icon is same as the current one that is already set we do nothing.
+                        if (currentIcon==icon.themeName) return@MyApp
+                        changeIcon(icon,currentIcon!!)
                     },
                 )
             }
@@ -86,14 +89,9 @@ class MainActivity : ComponentActivity() {
      * as current one then we do nothing. Otherwise we apply the new icon and update the
      * current icon data in our shared preference.
     * */
-    private fun changeIcon(selectedIcon: AppLauncherIcons) {
+    private fun changeIcon(selectedIcon: AppLauncherIcons,currentIcon:String) {
 
-        val currentIcon = sharedPref.getString(CURRENT_ICON_KEY,AppLauncherIcons.Default_Theme.themeName)
-
-        // If the selected icon is same as the current one that is already set we do nothing.
-        if (currentIcon==selectedIcon.themeName) return
-
-        // Current Icon that will be selected as new launcher icon.
+        // New selected icon will be set as new launcher icon.
         packageManager.setComponentEnabledSetting(
             ComponentName(
                 this,
@@ -103,13 +101,16 @@ class MainActivity : ComponentActivity() {
             PackageManager.DONT_KILL_APP
         )
 
+        // Check if we need to disable / set default
+        val disableOrSetDefault = needToDisableOrSetDefault(currentIcon)
+
         // Disabling old launcher icon after new one is set.
         packageManager.setComponentEnabledSetting(
             ComponentName(
                 this,
                 "$packageName${currentIcon}"
             ),
-            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            disableOrSetDefault,
             PackageManager.DONT_KILL_APP
         )
 
@@ -118,6 +119,21 @@ class MainActivity : ComponentActivity() {
             putString(CURRENT_ICON_KEY,selectedIcon.themeName)
             apply()
         }
+    }
+
+    /**
+    * If the current alias is the default one( the activity-alias which is having this property -> android:enabled="true" )
+     * we need to use COMPONENT_ENABLED_STATE_DISABLED to disable it, it will cause the app to kill.
+     * If the current alias default enabled property is "false" ( activity-alias with android:enabled="false") we can use
+     * COMPONENT_ENABLED_STATE_DEFAULT to reset that alias's enabled property set to false (as we have given it enabled="false" in manifest).
+     * This will make sure the launcher icon change doesn't cause app kill when changing between two activity-alias
+     * whose default enabled property is false (android:enabled="false").
+    * */
+    private fun needToDisableOrSetDefault(currentIcon:String):Int{
+       return if (currentIcon==AppLauncherIcons.Default_Theme.themeName)
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+        else
+            PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
     }
 }
 
